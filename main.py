@@ -1,4 +1,4 @@
-from console_calculator import ConsoleCalculator
+from calculator_manager import CalculatorManager
 
 if __name__ == '__main__':
-    ConsoleCalculator().show_calculator()
+    CalculatorManager()
