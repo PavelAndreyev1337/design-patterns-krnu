@@ -6,8 +6,20 @@ from calculator_logic.calculator_factory import CalculatorFactory
 
 
 class CalculatorManager:
+    """The Singleton class."""
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if CalculatorManager.__instance == None:
+            CalculatorManager()
+        return CalculatorManager.__instance
+
     def __init__(self):
-        self.show_menu()
+        if CalculatorManager.__instance != None:
+            raise Exception("Calculator manager is singleton!")
+        else:
+            CalculatorManager.__instance = self
 
     def show_menu(self):
         print("Choose your calculator:")
