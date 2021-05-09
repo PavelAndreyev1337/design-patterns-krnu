@@ -1,8 +1,6 @@
 import os
 from calculator_type import CalculatorType
-from digit_console_calculator import DigitConsoleCalculator
-from complex_console_calculator import ComplexConsoleCalculator
-from calculator_logic.calculator_factory import CalculatorFactory
+from console_calculator_factory import ConsoleCalculatorFactory
 
 
 class CalculatorManager:
@@ -15,12 +13,11 @@ class CalculatorManager:
         try:
             calc_type = int(input())
             os.system("cls")
+            ConsoleCalculatorFactory.initialize()
             if CalculatorType.DIGIT == calc_type:
-                DigitConsoleCalculator(
-                    CalculatorFactory.create()).show_calculator()
+                ConsoleCalculatorFactory.create_digit_calculator().show_calculator()
             elif CalculatorType.COMPLEX == calc_type:
-                ComplexConsoleCalculator(
-                    CalculatorFactory.create()).show_calculator()
+                ConsoleCalculatorFactory.create_complex_calculator().show_calculator()
             else:
                 exit()
         except Exception as e:

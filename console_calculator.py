@@ -1,10 +1,15 @@
 import os
 from calculator_logic.calculator import Calculator
+from copy import deepcopy
 
 
-class DigitConsoleCalculator:
-    def __init__(self, calculator):
+class ConsoleCalculator:
+    def __init__(self, calculator, type=float):
         self.__calculator = calculator
+        self.__type = type
+
+    def set_type(self, cls):
+        self.__type = cls
 
     def show_calculator(self):
         print(self.__calculator.memory_number)
@@ -12,7 +17,7 @@ class DigitConsoleCalculator:
         if operation == "exit":
             exit()
         try:
-            number = float(input())
+            number = self.__type(input())
             self.__calculator.memory_number = self.__calculator.calculate(self.__calculator.memory_number,
                                                                           number, operation)
             os.system("cls")
@@ -21,3 +26,6 @@ class DigitConsoleCalculator:
             print(str(e))
         finally:
             self.show_calculator()
+
+    def clone(self):
+        return deepcopy(self)
