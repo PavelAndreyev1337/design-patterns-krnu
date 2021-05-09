@@ -8,8 +8,8 @@ class ConsoleCalculator:
         self.__calculator = calculator
         self.__type = type
 
-    def set_type(self, cls):
-        self.__type = cls
+    def set_type(self, type):
+        self.__type = type
 
     def show_calculator(self):
         print(self.__calculator.memory_number)
