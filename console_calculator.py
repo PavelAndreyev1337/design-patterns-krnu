@@ -3,31 +3,27 @@ from calculator_logic.calculator import Calculator
 
 
 class ConsoleCalculator:
-    def __init__(self):
+    def __init__(self, parser):
         self.__calculator = Calculator()
+        self.__parser = parser
 
-    @staticmethod
-    def check_float(potential_number):
-        try:
-            float(potential_number)
-            return True
-        except ValueError:
-            return False
+    @property
+    def parser(self):
+        return self.__parser
+
+    @parser.setter
+    def parser(self, parser):
+        self.__parser = parser
 
     def show_calculator(self):
         print(self.__calculator.memory_number)
-        operation = input()
-        if operation == "exit":
-            exit()
         try:
-            input_value = input()
-            if self.check_float(input_value):
-                number = float(input_value)
-            else:
-                number = complex(input_value)
+            operation, number = self.__parser.parse()
             self.__calculator.memory_number = self.__calculator.calculate(self.__calculator.memory_number,
                                                                           number, operation)
             os.system("cls")
+        except SystemExit:
+            os._exit(0)
         except Exception as e:
             os.system("cls")
             print(str(e))
